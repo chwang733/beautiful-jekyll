@@ -24,6 +24,8 @@ description: Place for general information about myself and projects
 # List of links in the navigation bar
 navbar-links:
   About Me: "aboutme"
+  Projects: 
+    - Language Model: "language-model"
   Resources:
     - fastai: https://www.fast.ai/
 
