@@ -49,7 +49,8 @@ use-site-title: true
       }
 
       document.getElementById("text-spinner").style.display = ''
-      return fetch('http://chihchungwang.synology.me:8082/lm/inference', myInit)
+#      return fetch('http://chihchungwang.synology.me:8082/lm/inference', myInit)
+      return fetch('https://9im8qt8ox5.execute-api.us-east-1.amazonaws.com/dev/lm/inference',myInit)
         .then(async (response) => {
           var typeIt = new TypeIt('.type-it', {
             speed: 20,
