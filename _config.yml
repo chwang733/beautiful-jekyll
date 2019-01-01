@@ -26,6 +26,7 @@ navbar-links:
   About Me: "aboutme"
   Projects: 
     - Language Model: "language-model"
+    - Image Classifier: "image-classifier"
   Resources:
     - fastai: https://www.fast.ai/
 
