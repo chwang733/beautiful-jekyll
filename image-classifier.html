@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Image Classifier Example
+title: Image Classifier Examples
 subtitle: Classify images using a pretrained Neural Network. 
 
 e-site-title: true
@@ -11,16 +11,23 @@ e-site-title: true
   <div class="row">
     <div class="col-lg-8 col-lg col-md-10 col-md">
       <div class="main-explain-area jumbotron">
-        <h3>Take a picture or upload a file to check the facial emotion using our Neural Network!</h3>
+        <h3>Take a picture or upload a file to try out our pre-trained Neural Network!</h3>
         <div id="text-spinner" class="spinner" style="display:none"> 
           <div class="double-bounce1"></div>
           <div class="double-bounce2"></div>
         </div>
-        <p>
+        Select Image Classifier
+          <select id='icselector' onChange='showlabel()'>
+            <option value="" selected >Please Select</option>
+            <option value="KDEF" >Facial Emotion</option>
+            <option value="teddys" >Teddys/Black Bears/Grizzly</option>
+            <option value="dogbreeds"  >Dog Breeds</option>
+            <option value="catsdogs"  >Cats vs Dogs</option>
+          </select>
           <br/>
-        </p>
+        <p id='the-label' />
         <div class="get-started-wrap">
-          <form id="the-form" enctype="multipart/form-data" >
+          <form id="the-form" enctype="multipart/form-data" style="display: none;" >
               <input type="file" name='file' onClick='cleanup()' onChange='imInference()'/>
           </form>
          <!-- <a class="btn btn-default btn-lg get-started-btn" onclick="imInference()">submit</a>-->
@@ -37,9 +44,38 @@ e-site-title: true
   <!-- Function get the text -->
   <script type="text/javascript" language="javascript">
     function cleanup() {
- 
           document.getElementById('the-img').src= ""
+    }
 
+    function showlabel() {
+          var fm=document.getElementById('the-form')
+          var ic=document.getElementById('icselector').value
+          var label=''
+          switch(ic){ 
+              case '':
+                  label='Please select image classifier first';
+                  fm.style.display='none';
+                  break;
+              case 'KDEF':
+                  label='facial expression emotion image classifier. Please remove glasses before taking a selfie. The training dataset includes predominantly white males/females, so the accuracy is low for other races'
+                  fm.style.display='';
+                  break;
+              case 'teddys':
+                  label='image classifier to distinguish teddy bears, grizzly, or black bears'
+                  fm.style.display='';
+                  break;
+              case 'dogbreeds':
+                  label='image classifier to tell different dog breeds ( from Kaggle competition dataset)'
+                  fm.style.display='';
+                  break;
+              case 'catsdogs':
+                  label='image classifier to tell dogs from cats'
+                  fm.style.display='';
+                  break;
+          }
+          
+
+          document.getElementById('the-label').innerHTML=label
     }
 
     function imInference() {
@@ -49,6 +85,9 @@ e-site-title: true
       var input = document.querySelector('input[type="file"]')
 
 
+      var ic=document.getElementById('icselector').value
+
+      console.info(ic)
       formData.append('file', input.files[0]);
 
       var myInit = {
@@ -66,7 +105,7 @@ e-site-title: true
 
       document.getElementById("text-spinner").style.display = ''
       //return fetch('http://chihchungwang.synology.me:8082/bears/inference', myInit)
-      return fetch('https://9im8qt8ox5.execute-api.us-east-1.amazonaws.com/dev/bears/inference', myInit)
+      return fetch('https://9im8qt8ox5.execute-api.us-east-1.amazonaws.com/dev/bears/inference?imageclassifier=' + ic, myInit)
       .then((resp) => resp.json())
       .then(function(response) {
           var typeIt = new TypeIt('.type-it', {
