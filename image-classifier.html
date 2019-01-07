@@ -21,7 +21,7 @@ e-site-title: true
         </p>
         <div class="get-started-wrap">
           <form id="the-form" enctype="multipart/form-data" >
-              <input type="file" name='file' onChange='imInference()' >
+              <input type="file" name='file' onClick='cleanup()' onChange='imInference()'/>
           </form>
          <!-- <a class="btn btn-default btn-lg get-started-btn" onclick="imInference()">submit</a>-->
          <span class="type-it"></span>
@@ -36,7 +36,11 @@ e-site-title: true
 
   <!-- Function get the text -->
   <script type="text/javascript" language="javascript">
+    function cleanup() {
+ 
+          document.getElementById('the-img').src= ""
 
+    }
 
     function imInference() {
 
