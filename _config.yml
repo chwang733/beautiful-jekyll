@@ -25,8 +25,8 @@ description: Place for general information about myself and projects
 navbar-links:
   About Me: "aboutme"
   Projects: 
-    - Language Model: "language-model"
-    - Image Classifier: "image-classifier"
+    - Language Model: "https://chwang733.github.io/DeepLearning_EndtoEnd/language-model"
+    - Image Classifier: "https://chwang733.github.io/DeepLearning_EndtoEnd/image-classifier"
   Resources:
     - fastai: https://www.fast.ai/
 
